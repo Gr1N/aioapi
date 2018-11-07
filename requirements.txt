@@ -1,0 +1,16 @@
+# This file generated from `pyproject.toml` by running commands:
+#   - poetry install --no-dev
+#   - poetry run pip freeze > requirements.txt
+#
+# This file needed only for integration with PyUP.
+#
+# Do not forget to regenerate in case you've added new dependency
+# in `pyproject.toml`.
+aiohttp==3.4.4
+async-timeout==3.0.1
+attrs==18.2.0
+chardet==3.0.4
+idna==2.7
+multidict==4.4.2
+pydantic==0.14
+yarl==1.2.6

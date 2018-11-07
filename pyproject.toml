@@ -1,0 +1,55 @@
+[tool.black]
+line-length = 88
+py36 = true
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | \.vscode
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.poetry]
+name = "aiohttp-typed-views"
+version = "0.1.0-alpha.0"
+description = "Typed class based views for aiohttp framework"
+authors = [
+    "Nikita Grishko <gr1n@protonmail.com>"
+]
+license = "MIT"
+
+readme = "README.md"
+
+homepage = "https://github.com/Gr1N/aiohttp-typed-views"
+repository = "https://github.com/Gr1N/aiohttp-typed-views"
+
+keywords = ["asyncio", "aiohttp", "typing", "class based views"]
+
+classifiers = [
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+
+[tool.poetry.dependencies]
+python = "~3.7"
+
+aiohttp = "^3.4"
+pydantic = "*"
+
+[tool.poetry.dev-dependencies]
+black = "*"
+flake8 = "*"
+flake8-bugbear = "*"
+isort = "*"
+mypy = "*"
+pytest = "*"
+pytest-asyncio = "*"
+pytest-cov = "*"
+tox = "*"
