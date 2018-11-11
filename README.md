@@ -8,6 +8,8 @@ Typed class based views for [`aiohttp`](https://aiohttp.readthedocs.io/) framewo
 
 ## Usage
 
+Examples of usage can be found at `examples` directory.
+
 ## Contributing
 
 To work on the `aiohttp-typed-views` codebase, you'll want to clone the project locally and install the required dependencies via [poetry](https://poetry.eustace.io):
