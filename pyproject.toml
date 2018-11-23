@@ -44,7 +44,7 @@ aiohttp = "^3.4"
 pydantic = "*"
 
 [tool.poetry.dev-dependencies]
-black = "*"
+black = { version = "*", allows-prereleases = true }
 flake8 = "*"
 flake8-bugbear = "*"
 isort = "*"
