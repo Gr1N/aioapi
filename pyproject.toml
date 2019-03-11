@@ -38,18 +38,18 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "~3.7"
+python = "^3.7"
 
-aiohttp = "^3.4"
-pydantic = "*"
+aiohttp = ">=3.5.4"
+pydantic = ">=0.20.1"
 
 [tool.poetry.dev-dependencies]
-black = { version = "*", allows-prereleases = true }
-flake8 = "*"
-flake8-bugbear = "*"
-isort = "*"
-mypy = "*"
-pytest = "*"
-pytest-asyncio = "*"
-pytest-cov = "*"
-tox = "*"
+black = { version = ">=18.9b0", allows-prereleases = true }
+flake8 = ">=3.7.7"
+flake8-bugbear = ">=18.8.0"
+isort = { version = ">=4.3.15", extras = ["pyproject"] }
+mypy = ">=0.670"
+pytest = ">=4.3.0"
+pytest-asyncio = ">=0.10.0"
+pytest-cov = ">=2.6.1"
+tox = ">=3.7.0"
