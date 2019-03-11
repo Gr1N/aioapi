@@ -1,4 +1,4 @@
-# aiohttp-typed-views [![Build Status](https://travis-ci.org/Gr1N/aiohttp-typed-views.svg?branch=master)](https://travis-ci.org/Gr1N/aiohttp-typed-views) [![codecov](https://codecov.io/gh/Gr1N/aiohttp-typed-views/branch/master/graph/badge.svg)](https://codecov.io/gh/Gr1N/aiohttp-typed-views) [![Updates](https://pyup.io/repos/github/Gr1N/aiohttp-typed-views/shield.svg)](https://pyup.io/repos/github/Gr1N/aiohttp-typed-views/) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+# aiohttp-typed-views
 
 Typed class based views for [`aiohttp`](https://aiohttp.readthedocs.io/) framework.
 
