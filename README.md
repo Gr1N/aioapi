@@ -33,28 +33,9 @@ If you want to run only tests or linters you can explicitly specify which test e
 $ poetry run tox -e py37-tests
 ```
 
-## TODO
+## Milestones
 
-### 0.2.0
-
-* [ ] path parameters
-* [ ] query parameters
-* [ ] request body
-
-### 0.3.0
-
-* [ ] cookie parameters
-* [ ] header parameters
-* [ ] response body
-
-### 0.4.0
-
-* [ ] OpenAPI
-
-### 0.5.0
-
-* [ ] request form data
-* [ ] request files
+If you're interesting in project's future you can find milestones and plans at [projects](https://github.com/Gr1N/aiohttp-typed-views/projects) page.
 
 ## License
 
