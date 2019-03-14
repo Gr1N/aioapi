@@ -24,16 +24,16 @@ default_section = "LOCALFOLDER"
 force_grid_wrap = false
 include_trailing_comma = true
 known_first_party = """
-    aiohttp_typed_views,
-    example
+  aiohttp_typed_views
+  example
 """
 known_standard_library = """
-    dataclasses
+  dataclasses
 """
 known_third_party = """
-    aiohttp,
-    pydantic,
-    pytest,
+  aiohttp
+  pydantic
+  pytest
 """
 line_length = 88
 multi_line_output = 3
@@ -46,7 +46,7 @@ name = "aiohttp-typed-views"
 version = "0.2.0-alpha.0"
 description = "Typed class based views for aiohttp framework"
 authors = [
-    "Nikita Grishko <gr1n@protonmail.com>"
+  "Nikita Grishko <gr1n@protonmail.com>"
 ]
 license = "MIT"
 
@@ -58,7 +58,7 @@ repository = "https://github.com/Gr1N/aiohttp-typed-views"
 keywords = ["asyncio", "aiohttp", "typing", "class based views"]
 
 classifiers = [
-    "Topic :: Software Development :: Libraries :: Python Modules"
+  "Topic :: Software Development :: Libraries :: Python Modules"
 ]
 
 [tool.poetry.dependencies]
