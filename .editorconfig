@@ -13,3 +13,7 @@ indent_size = 4
 [*.{hcl,md,toml,yml}]
 indent_style = space
 indent_size = 2
+
+[Makefile]
+indent_style = tab
+indent_size = tab
