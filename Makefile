@@ -4,7 +4,7 @@ example:
 
 .PHONY: lint
 lint:
-	@poetry run tox -e py37-lint-black,py37-lint-flake8,py37-lint-isort,py37-lint-mypy -p all
+	@poetry run tox -e py37-lint-black,py37-lint-flake8,py37-lint-isort,py37-lint-mypy
 
 .PHONY: test
 test:

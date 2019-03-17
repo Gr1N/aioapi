@@ -27,9 +27,6 @@ known_first_party = """
   aiohttp_typed_views
   example
 """
-known_standard_library = """
-  dataclasses
-"""
 known_third_party = """
   aiohttp
   pydantic
