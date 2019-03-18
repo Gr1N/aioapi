@@ -12,6 +12,12 @@ $ pip install aiohttp-typed-views
 
 Examples of usage can be found at `examples` directory.
 
+To run example use command below:
+
+```sh
+$ make example
+```
+
 ## Contributing
 
 To work on the `aiohttp-typed-views` codebase, you'll want to clone the project locally and install the required dependencies via [poetry](https://poetry.eustace.io):
@@ -24,13 +30,13 @@ $ poetry install
 To run tests and linters use command below:
 
 ```sh
-$ poetry run tox
+$ make lint && make test
 ```
 
-If you want to run only tests or linters you can explicitly specify which test environment you want to run, e.g.:
+If you want to run only tests or linters you can explicitly specify what you want to run, e.g.:
 
 ```sh
-$ poetry run tox -e py37-tests
+$ make lint-black
 ```
 
 ## Milestones

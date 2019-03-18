@@ -3,47 +3,18 @@ workflow "run linters and tests" {
   resolves = ["notify build succeeded"]
 }
 
-action "py3.7 linting black" {
+action "py3.7 linting" {
   uses = "docker://gr1n/the-python-action:master"
-  args = "tox -e py37-black"
-  env = {
-    PYTHON_VERSION = "3.7.2"
-  }
-}
-
-action "py3.7 linting flake8" {
-  uses = "docker://gr1n/the-python-action:master"
-  args = "tox -e py37-flake8"
-  env = {
-    PYTHON_VERSION = "3.7.2"
-  }
-}
-
-action "py3.7 linting isort" {
-  uses = "docker://gr1n/the-python-action:master"
-  args = "tox -e py37-isort"
-  env = {
-    PYTHON_VERSION = "3.7.2"
-  }
-}
-
-action "py3.7 linting mypy" {
-  uses = "docker://gr1n/the-python-action:master"
-  args = "tox -e py37-mypy"
+  args = "poetry install && make lint"
   env = {
     PYTHON_VERSION = "3.7.2"
   }
 }
 
 action "py3.7 testing" {
-  needs = [
-    "py3.7 linting black",
-    "py3.7 linting flake8",
-    "py3.7 linting isort",
-    "py3.7 linting mypy",
-  ]
+  needs = "py3.7 linting"
   uses = "docker://gr1n/the-python-action:master"
-  args = "tox -e py37-tests"
+  args = "poetry install && make test"
   env = {
     PYTHON_VERSION = "3.7.2"
   }
