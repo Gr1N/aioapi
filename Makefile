@@ -36,3 +36,18 @@ lint: lint-black lint-flake8 lint-isort lint-mypy
 .PHONY: test
 test:
 	@poetry run pytest --cov-report term --cov-report html --cov=aiohttp_typed_views -vv
+
+.PHONY: publish
+publish:
+	@poetry publish --username=$(PYPI_USERNAME) --password=$(PYPI_PASSWORD) --build
+
+.PHONY: ci-poetry
+ci-poetry:
+	@pip install poetry
+	@poetry install -v
+
+.PHONE: ci-quality
+ci-quality: ci-poetry lint test
+
+.PHONE: ci-publish
+ci-publish: ci-poetry publish

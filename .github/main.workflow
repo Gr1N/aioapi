@@ -3,25 +3,13 @@ workflow "run linters and tests" {
   resolves = ["notify build succeeded"]
 }
 
-action "py3.7 linting" {
-  uses = "docker://gr1n/the-python-action:master"
-  args = "poetry install && make lint"
-  env = {
-    PYTHON_VERSION = "3.7.2"
-  }
-}
-
-action "py3.7 testing" {
-  needs = "py3.7 linting"
-  uses = "docker://gr1n/the-python-action:master"
-  args = "poetry install && make test"
-  env = {
-    PYTHON_VERSION = "3.7.2"
-  }
+action "py3.7 linting and testing" {
+  uses = "docker://python:3.7.2"
+  runs = ["sh", "-c", "make ci-quality"]
 }
 
 action "notify build succeeded" {
-  needs = "py3.7 testing"
+  needs = "py3.7 linting and testing"
   uses = "docker://gr1n/the-telegram-action:master"
   env = {
     TELEGRAM_MESSAGE = "`aiohttp-typed-view` build succeeded"
@@ -54,11 +42,8 @@ workflow "publish" {
 }
 
 action "py37 publish" {
-  uses = "docker://gr1n/the-python-action:master"
-  args = "poetry publish --username=$PYPI_USERNAME --password=$PYPI_PASSWORD --build"
-  env = {
-    PYTHON_VERSION = "3.7.2"
-  }
+  uses = "docker://python:3.7.2"
+  runs = ["sh", "-c", "make ci-publish"]
   secrets = [
     "PYPI_USERNAME",
     "PYPI_PASSWORD",
