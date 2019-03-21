@@ -12,6 +12,9 @@ install-poetry:
 install-deps:
 	@$(POETRY) install -vv
 
+.PHONY: install
+install: install-poetry install-deps
+
 .PHONY: lint-black
 lint-black:
 	@echo "\033[92m< linting using black...\033[0m"
@@ -52,7 +55,7 @@ publish:
 	@$(POETRY) publish --username=$(PYPI_USERNAME) --password=$(PYPI_PASSWORD) --build
 
 .PHONY: ci-quality
-ci-quality: install-poetry install-deps lint test
+ci-quality: install lint test
 
 .PHONY: ci-publish
 ci-publish: install-poetry publish

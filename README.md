@@ -24,7 +24,7 @@ To work on the `aiohttp-typed-views` codebase, you'll want to clone the project 
 
 ```sh
 $ git clone git@github.com:Gr1N/aiohttp-typed-views.git
-$ poetry install
+$ make install
 ```
 
 To run tests and linters use command below:
