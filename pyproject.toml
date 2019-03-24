@@ -22,7 +22,7 @@ default_section = "LOCALFOLDER"
 force_grid_wrap = false
 include_trailing_comma = true
 known_first_party = """
-  aiohttp_typed_views
+  aioapi
   example
 """
 known_third_party = """
@@ -37,9 +37,9 @@ sections = "FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
 skip = ".eggs,.venv,venv"
 
 [tool.poetry]
-name = "aiohttp-typed-views"
+name = "aioapi"
 version = "0.2.0-alpha.0"
-description = "Typed class based views for aiohttp framework"
+description = "Yet another way to build APIs using AIOHTTP framework"
 authors = [
   "Nikita Grishko <gr1n@protonmail.com>"
 ]
@@ -47,12 +47,15 @@ license = "MIT"
 
 readme = "README.md"
 
-homepage = "https://github.com/Gr1N/aiohttp-typed-views"
-repository = "https://github.com/Gr1N/aiohttp-typed-views"
+homepage = "https://github.com/Gr1N/aioapi"
+repository = "https://github.com/Gr1N/aioapi"
 
-keywords = ["asyncio", "aiohttp", "typing", "class based views"]
+keywords = ["asyncio", "aiohttp", "api", "typing"]
 
 classifiers = [
+  "Development Status :: 4 - Beta",
+  "Framework :: AsyncIO",
+  "Intended Audience :: Developers",
   "Topic :: Software Development :: Libraries :: Python Modules"
 ]
 

@@ -12,7 +12,7 @@ action "notify build succeeded" {
   needs = "py3.7 linting and testing"
   uses = "docker://gr1n/the-telegram-action:master"
   env = {
-    TELEGRAM_MESSAGE = "`aiohttp-typed-view` build succeeded"
+    TELEGRAM_MESSAGE = "`aioapi` build succeeded"
   }
   secrets = [
     "TELEGRAM_BOT_TOKEN",
@@ -28,7 +28,7 @@ workflow "notify about new star" {
 action "notify project starred" {
   uses = "docker://gr1n/the-telegram-action:master"
   env = {
-    TELEGRAM_MESSAGE = "`aiohttp-typed-views` starred!"
+    TELEGRAM_MESSAGE = "`aioapi` starred!"
   }
   secrets = [
     "TELEGRAM_BOT_TOKEN",
@@ -54,7 +54,7 @@ action "notify project published" {
   uses = "docker://gr1n/the-telegram-action:master"
   needs = ["py37 publish"]
   env = {
-    TELEGRAM_MESSAGE = "`aiohttp-typed-views` published to PyPI"
+    TELEGRAM_MESSAGE = "`aioapi` published to PyPI"
   }
   secrets = [
     "TELEGRAM_BOT_TOKEN",

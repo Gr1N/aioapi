@@ -1,6 +1,6 @@
 from aiohttp import web
 
-from aiohttp_typed_views import Body, PathParam, QueryParam
+from aioapi import Body, PathParam, QueryParam
 from example.schemas import HelloBodyRequest
 
 __all__ = ("hello_batman", "hello_body", "hello_path", "hello_query")

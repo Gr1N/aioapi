@@ -3,7 +3,7 @@ from typing import Any, Optional
 from aiohttp import hdrs
 from aiohttp.web_routedef import RouteDef, _HandlerType
 
-from aiohttp_typed_views import handlers
+from aioapi import handlers
 
 __all__ = ("head", "options", "get", "post", "put", "patch", "delete")
 

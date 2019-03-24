@@ -25,7 +25,7 @@ lint-black:
 .PHONY: lint-flake8
 lint-flake8:
 	@echo "\033[92m< linting using flake8...\033[0m"
-	@$(POETRY) run flake8 aiohttp_typed_views example tests
+	@$(POETRY) run flake8 aioapi example tests
 	@echo "\033[92m> done\033[0m"
 	@echo
 
@@ -39,7 +39,7 @@ lint-isort:
 .PHONY: lint-mypy
 lint-mypy:
 	@echo "\033[92m< linting using mypy...\033[0m"
-	@$(POETRY) run mypy --ignore-missing-imports --follow-imports=silent aiohttp_typed_views example tests
+	@$(POETRY) run mypy --ignore-missing-imports --follow-imports=silent aioapi example tests
 	@echo "\033[92m> done\033[0m"
 	@echo
 
@@ -48,7 +48,7 @@ lint: lint-black lint-flake8 lint-isort lint-mypy
 
 .PHONY: test
 test:
-	@$(POETRY) run pytest --cov-report term --cov-report html --cov=aiohttp_typed_views -vv
+	@$(POETRY) run pytest --cov-report term --cov-report html --cov=aioapi -vv
 
 .PHONY: publish
 publish:

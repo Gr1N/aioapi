@@ -3,12 +3,12 @@ from typing import Any, Awaitable, Callable, Tuple
 
 from pydantic import Required, create_model
 
-from aiohttp_typed_views.inspect.entities import HandlerMeta
-from aiohttp_typed_views.inspect.exceptions import (
+from aioapi.inspect.entities import HandlerMeta
+from aioapi.inspect.exceptions import (
     HandlerMultipleBodyError,
     HandlerParamUnknownTypeError,
 )
-from aiohttp_typed_views.typedefs import Body, PathParam, QueryParam
+from aioapi.typedefs import Body, PathParam, QueryParam
 
 __all__ = ("HandlerInspector",)
 

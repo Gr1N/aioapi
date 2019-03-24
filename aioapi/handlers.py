@@ -6,9 +6,9 @@ from aiohttp import web
 from aiohttp.web_routedef import _HandlerType
 from pydantic import BaseModel, ValidationError
 
-from aiohttp_typed_views.inspect.entities import HandlerMeta
-from aiohttp_typed_views.inspect.inspector import HandlerInspector
-from aiohttp_typed_views.typedefs import Body, PathParam, QueryParam
+from aioapi.inspect.entities import HandlerMeta
+from aioapi.inspect.inspector import HandlerInspector
+from aioapi.typedefs import Body, PathParam, QueryParam
 
 __all__ = ("wraps",)
 
