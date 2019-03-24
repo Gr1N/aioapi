@@ -1,5 +1,5 @@
 from .routedef import delete, get, head, options, patch, post, put
-from .typedefs import PathParam, QueryParam
+from .typedefs import Body, PathParam, QueryParam
 
 __all__ = (
     "delete",
@@ -9,6 +9,7 @@ __all__ = (
     "patch",
     "post",
     "put",
+    "Body",
     "PathParam",
     "QueryParam",
 )

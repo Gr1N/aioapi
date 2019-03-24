@@ -14,6 +14,7 @@ def get_application():
             web.get("/hello_batman", views.hello_batman),
             tpd.get("/hello/{name}", views.hello_path),
             tpd.get("/hello_query", views.hello_query),
+            tpd.post("/hello_body", views.hello_body),
         ]
     )
 

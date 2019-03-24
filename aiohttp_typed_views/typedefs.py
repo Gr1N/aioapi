@@ -1,10 +1,25 @@
 from typing import Generic, TypeVar
 
-__all__ = ("PathParam", "QueryParam")
+__all__ = ("Body", "PathParam", "QueryParam")
 
 
+TVBody = TypeVar("TVBody")
 TVPathParam = TypeVar("TVPathParam")
 TVQueryParam = TypeVar("TVQueryParam")
+
+
+class Body(Generic[TVBody]):
+    __slots__ = ("_cleaned",)
+
+    @property
+    def cleaned(self) -> TVBody:
+        return self._cleaned
+
+    def __init__(self, cleaned: TVBody) -> None:
+        self._cleaned = cleaned
+
+    def __str__(self) -> str:
+        return f"<Body({self._cleaned})>"
 
 
 class PathParam(Generic[TVPathParam]):
