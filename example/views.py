@@ -3,7 +3,13 @@ from aiohttp import web
 from aioapi import Body, PathParam, QueryParam
 from example.schemas import HelloBodyRequest
 
-__all__ = ("hello_batman", "hello_body", "hello_path", "hello_query")
+__all__ = (
+    "hello_batman",
+    "hello_components",
+    "hello_body",
+    "hello_path",
+    "hello_query",
+)
 
 
 DEFAULT_AGE_QUERY_PARAM = QueryParam(27)
@@ -11,6 +17,10 @@ DEFAULT_AGE_QUERY_PARAM = QueryParam(27)
 
 async def hello_batman(request):
     return web.json_response({"whoami": "I'm Batman!"})
+
+
+async def hello_components(request: web.Request, app: web.Application):
+    return web.json_response({"whoami": id(request), "whoareyou": id(app)})
 
 
 async def hello_body(body: Body[HelloBodyRequest]):

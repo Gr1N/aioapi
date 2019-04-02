@@ -1,6 +1,8 @@
 import inspect
+from functools import partial
 from typing import Any, Awaitable, Callable, Tuple
 
+from aiohttp.web import Application, Request
 from pydantic import Required, create_model
 
 from aioapi.inspect.entities import HandlerMeta
@@ -10,7 +12,7 @@ from aioapi.inspect.exceptions import (
 )
 from aioapi.typedefs import Body, PathParam, QueryParam
 
-__all__ = ("HandlerInspector",)
+__all__ = ("HandlerInspector", "param_of")
 
 NOT_INITIALIZED = object()
 
@@ -23,6 +25,7 @@ class HandlerInspector:
         self._handler_name = f"{handler.__module__}.{handler.__name__}"
 
     def __call__(self) -> HandlerMeta:
+        components_mapping = {}
         body_pair = None
         path_mapping = {}
         query_mapping = {}
@@ -31,8 +34,11 @@ class HandlerInspector:
         for param in signature.parameters.values():
             param_name = param.name
             param_type = param.annotation
+            param_of_type = partial(param_of, type_=param_type)
 
-            if param_of(type_=param_type, is_=Body):
+            if param_of_type(is_=Application) or param_of_type(is_=Request):
+                components_mapping[param_name] = param_type
+            elif param_of_type(is_=Body):
                 # We allow only one parameter of body type, so if there are more
                 # parameters of body type we will raise a corresponding error.
                 if body_pair is not None:
@@ -44,9 +50,9 @@ class HandlerInspector:
                     param_name,
                     inspect_param_type(param_type, inspect_default=param.default),
                 )
-            elif param_of(type_=param_type, is_=PathParam):
+            elif param_of_type(is_=PathParam):
                 path_mapping[param_name] = inspect_param_type(param_type)
-            elif param_of(type_=param_type, is_=QueryParam):
+            elif param_of_type(is_=QueryParam):
                 query_mapping[param_name] = inspect_param_type(
                     param_type, inspect_default=param.default
                 )
@@ -79,6 +85,7 @@ class HandlerInspector:
 
         return HandlerMeta(
             name=self._handler_name,
+            components_mapping=components_mapping or None,
             request_type=request_type,
             request_body_pair=body_pair,
             request_path_mapping=path_mapping or None,

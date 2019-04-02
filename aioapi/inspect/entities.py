@@ -9,6 +9,7 @@ __all__ = ("HandlerMeta",)
 @dataclass(frozen=True)
 class HandlerMeta:
     name: str
+    components_mapping: Optional[Dict[str, Any]] = None
     request_type: Optional[BaseModel] = None
     request_body_pair: Optional[Tuple[str, Any]] = None
     request_path_mapping: Optional[Dict[str, Any]] = None

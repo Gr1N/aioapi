@@ -1,5 +1,5 @@
+import json
 from functools import partial
-from http import HTTPStatus
 from typing import Awaitable, Callable, Dict, Iterator, Tuple, Union, cast
 
 from aiohttp import web
@@ -7,12 +7,12 @@ from aiohttp.web_routedef import _HandlerType
 from pydantic import BaseModel, ValidationError
 
 from aioapi.inspect.entities import HandlerMeta
-from aioapi.inspect.inspector import HandlerInspector
+from aioapi.inspect.inspector import HandlerInspector, param_of
 from aioapi.typedefs import Body, PathParam, QueryParam
 
 __all__ = ("wraps",)
 
-_HandlerParams = Union[Body, PathParam, QueryParam]
+_HandlerParams = Union[Body, PathParam, QueryParam, web.Application, web.Request]
 
 _GenRawDataResult = Tuple[str, dict]
 _GenRawDataCallable = Callable[[web.Request], Awaitable[_GenRawDataResult]]
@@ -26,9 +26,26 @@ def wraps(handler: _HandlerType) -> _HandlerType:
     handler_meta = HandlerInspector(handler_casted)()
 
     raw_data_generators = tuple(_gen_raw_data_generators(handler_meta))
-    kwargs_generators = tuple(_gen_kwargs_generators(handler_meta))
+    validated_data_generators = tuple(_gen_validated_data_generators(handler_meta))
 
-    async def wrapped(request: web.Request) -> web.StreamResponse:
+    def compose(request: web.Request) -> Dict[str, _HandlerParams]:
+        composed: Dict[str, _HandlerParams] = {}
+        if handler_meta.components_mapping is None:
+            return composed
+
+        for k, type_ in handler_meta.components_mapping.items():
+            if param_of(type_=type_, is_=web.Application):
+                composed[k] = request.app
+            elif param_of(type_=type_, is_=web.Request):
+                composed[k] = request
+
+        return composed
+
+    async def validate(request: web.Request) -> Dict[str, _HandlerParams]:
+        validated: Dict[str, _HandlerParams] = {}
+        if handler_meta.request_type is None:
+            return validated
+
         raw = {}
         for raw_data_generator in raw_data_generators:
             k, raw_data = await raw_data_generator(request)
@@ -37,20 +54,31 @@ def wraps(handler: _HandlerType) -> _HandlerType:
         try:
             cleaned = cast(BaseModel, handler_meta.request_type).parse_obj(raw)
         except ValidationError as e:
-            return web.json_response(
-                {"detail": e.errors()}, status=HTTPStatus.BAD_REQUEST
-            )
+            await raise_on_validation_error(request, e)
 
-        kwargs: Dict[str, _HandlerParams] = {}
-        for kwargs_generator in kwargs_generators:
-            for k, param in kwargs_generator(cleaned):
-                kwargs[k] = param
+        for validated_data_generator in validated_data_generators:
+            for k, param in validated_data_generator(cleaned):
+                validated[k] = param
+
+        return validated
+
+    async def raise_on_validation_error(
+        request: web.Request, exc: ValidationError
+    ) -> None:
+        raise web.HTTPBadRequest(
+            content_type="application/json", text=json.dumps({"detail": exc.errors()})
+        )
+
+    async def wrapped(request: web.Request) -> web.StreamResponse:
+        kwargs_composed = compose(request)
+        kwargs_validated = await validate(request)
+        kwargs = dict(**kwargs_composed, **kwargs_validated)
 
         resp = await handler_casted(**kwargs)
 
         return resp
 
-    return wrapped if handler_meta.request_type else handler
+    return wrapped
 
 
 def _gen_raw_data_generators(meta: HandlerMeta) -> Iterator[_GenRawDataCallable]:
@@ -76,7 +104,7 @@ async def _gen_query_raw_data(request: web.Request) -> _GenRawDataResult:
     return "query", dict(request.query)
 
 
-def _gen_kwargs_generators(meta: HandlerMeta) -> Iterator[_GenKwargsCallable]:
+def _gen_validated_data_generators(meta: HandlerMeta) -> Iterator[_GenKwargsCallable]:
     if meta.request_body_pair:
         yield partial(_gen_body_kwargs, meta=meta)
 
