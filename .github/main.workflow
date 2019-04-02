@@ -6,6 +6,9 @@ workflow "run linters and tests" {
 action "py3.7 linting and testing" {
   uses = "docker://python:3.7.2"
   runs = ["sh", "-c", "make ci-quality"]
+  secrets = [
+    "CODECOV_TOKEN",
+  ]
 }
 
 action "notify build succeeded" {

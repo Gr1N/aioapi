@@ -67,6 +67,7 @@ pydantic = ">=0.20.1"
 
 [tool.poetry.dev-dependencies]
 black = { version = ">=18.9b0", allows-prereleases = true }
+codecov = ">=2.0.15"
 flake8 = ">=3.7.7"
 flake8-bugbear = ">=18.8.0"
 isort = { version = ">=4.3.15", extras = ["pyproject"] }
