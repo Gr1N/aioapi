@@ -12,6 +12,14 @@ class HandlerInspectorError(Exception):
         self._handler = handler
         self._param = param
 
+    def __str__(self) -> str:
+        return repr(self)
+
+    def __repr__(self) -> str:
+        return (
+            f"<{self.__class__.__name__} handler={self._handler} param={self._param}>"
+        )
+
 
 class HandlerMultipleBodyError(HandlerInspectorError):
     pass
