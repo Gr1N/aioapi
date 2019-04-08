@@ -4,6 +4,7 @@ from aioapi import Body, PathParam, QueryParam
 from example.schemas import HelloBodyRequest
 
 __all__ = (
+    "HelloView",
     "hello_batman",
     "hello_components",
     "hello_body",
@@ -13,6 +14,19 @@ __all__ = (
 
 
 DEFAULT_AGE_QUERY_PARAM = QueryParam(27)
+
+
+class HelloView(web.View):
+    async def get(
+        self, name: QueryParam[str], age: QueryParam[int] = DEFAULT_AGE_QUERY_PARAM
+    ):
+        return web.json_response({"whoami": name.cleaned, "age": age.cleaned})
+
+    async def post(self, request: web.Request, body: Body[HelloBodyRequest]):
+        cleaned = body.cleaned
+        return web.json_response(
+            {"whoami": cleaned.name, "age": cleaned.age, "whoareyou": id(request)}
+        )
 
 
 async def hello_batman(request):

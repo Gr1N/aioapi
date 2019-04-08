@@ -16,6 +16,7 @@ def get_application():
             api.get("/hello/{name}", views.hello_path),
             api.get("/hello_query", views.hello_query),
             api.post("/hello_body", views.hello_body),
+            api.view("/hello_view", views.HelloView),
         ]
     )
 

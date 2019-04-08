@@ -1,6 +1,6 @@
 import inspect
 from functools import partial
-from typing import Any, Awaitable, Callable, Tuple
+from typing import Any, Awaitable, Callable, Optional, Tuple
 
 from aiohttp.web import Application, Request
 from pydantic import Required, create_model
@@ -20,9 +20,11 @@ NOT_INITIALIZED = object()
 class HandlerInspector:
     __slots__ = ("_handler", "_handler_name")
 
-    def __init__(self, handler: Callable[..., Awaitable]) -> None:
+    def __init__(
+        self, *, handler: Callable[..., Awaitable], handler_name: Optional[str] = None
+    ) -> None:
         self._handler = handler
-        self._handler_name = f"{handler.__module__}.{handler.__name__}"
+        self._handler_name = handler_name or f"{handler.__module__}.{handler.__name__}"
 
     def __call__(self) -> HandlerMeta:
         components_mapping = {}
@@ -33,6 +35,10 @@ class HandlerInspector:
         signature = inspect.signature(self._handler)
         for param in signature.parameters.values():
             param_name = param.name
+            # We allow to skip inspection for some parameters, e.g. `self`.
+            if param_name in ("self",):
+                continue
+
             param_type = param.annotation
             param_of_type = partial(param_of, type_=param_type)
 

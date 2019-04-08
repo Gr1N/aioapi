@@ -1,11 +1,12 @@
 from typing import Any, Optional
 
 from aiohttp import hdrs
+from aiohttp.abc import AbstractView
 from aiohttp.web_routedef import RouteDef, _HandlerType
 
 from aioapi import handlers
 
-__all__ = ("head", "options", "get", "post", "put", "patch", "delete")
+__all__ = ("head", "options", "get", "post", "put", "patch", "delete", "view")
 
 
 def head(path: str, handler: _HandlerType, **kwargs: Any) -> RouteDef:
@@ -43,6 +44,10 @@ def patch(path: str, handler: _HandlerType, **kwargs: Any) -> RouteDef:
 
 def delete(path: str, handler: _HandlerType, **kwargs: Any) -> RouteDef:
     return route(hdrs.METH_DELETE, path, handler, **kwargs)
+
+
+def view(path: str, handler: AbstractView, **kwargs: Any) -> RouteDef:
+    return route(hdrs.METH_ANY, path, handler, **kwargs)
 
 
 def route(method: str, path: str, handler: _HandlerType, **kwargs: Any) -> RouteDef:
