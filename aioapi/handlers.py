@@ -1,6 +1,5 @@
 import json
 from dataclasses import dataclass
-from functools import partial
 from typing import Awaitable, Callable, Dict, Iterator, Tuple, Union, cast
 
 from aiohttp import hdrs, web
@@ -22,7 +21,7 @@ _GenRawDataResult = Tuple[str, dict]
 _GenRawDataCallable = Callable[[web.Request], Awaitable[_GenRawDataResult]]
 
 _GenKwargsResult = Iterator[Tuple[str, _HandlerParams]]
-_GenKwargsCallable = Callable[[BaseModel], _GenKwargsResult]
+_GenKwargsCallable = Callable[[HandlerMeta, BaseModel], _GenKwargsResult]
 
 
 @dataclass(frozen=True)
@@ -125,7 +124,7 @@ async def _validate_kwargs(
         await _raise_on_validation_error(request, e)
 
     for kwargs_data_generator in data_generators.kwargs:
-        for k, param in kwargs_data_generator(cleaned):
+        for k, param in kwargs_data_generator(meta, cleaned):
             validated[k] = param
 
     return validated
@@ -178,7 +177,7 @@ async def _gen_query_raw_data(request: web.Request) -> _GenRawDataResult:
 
 def _gen_kwargs_data_generators(meta: HandlerMeta) -> Iterator[_GenKwargsCallable]:
     if meta.request_body_pair:
-        yield partial(_gen_body_kwargs, meta=meta)
+        yield _gen_body_kwargs
 
     if meta.request_path_mapping:
         yield _gen_path_kwargs
@@ -187,16 +186,16 @@ def _gen_kwargs_data_generators(meta: HandlerMeta) -> Iterator[_GenKwargsCallabl
         yield _gen_query_kwargs
 
 
-def _gen_body_kwargs(cleaned: BaseModel, *, meta: HandlerMeta) -> _GenKwargsResult:
+def _gen_body_kwargs(meta: HandlerMeta, cleaned: BaseModel) -> _GenKwargsResult:
     k, _ = cast(tuple, meta.request_body_pair)
     yield k, Body(cleaned.body)  # type: ignore
 
 
-def _gen_path_kwargs(cleaned: BaseModel) -> _GenKwargsResult:
+def _gen_path_kwargs(_meta: HandlerMeta, cleaned: BaseModel) -> _GenKwargsResult:
     for k, v in cleaned.path:  # type: ignore
         yield k, PathParam(v)
 
 
-def _gen_query_kwargs(cleaned: BaseModel) -> _GenKwargsResult:
+def _gen_query_kwargs(_meta: HandlerMeta, cleaned: BaseModel) -> _GenKwargsResult:
     for k, v in cleaned.query:  # type: ignore
         yield k, QueryParam(v)
