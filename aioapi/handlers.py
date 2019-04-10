@@ -100,7 +100,7 @@ def _compose_kwargs(meta: HandlerMeta, request: web.Request) -> _HandlerKwargs:
     for k, type_ in meta.components_mapping.items():
         if param_of(type_=type_, is_=web.Application):
             composed[k] = request.app
-        elif param_of(type_=type_, is_=web.Request):
+        elif param_of(type_=type_, is_=web.Request):  # pragma: no branch
             composed[k] = request
 
     return composed

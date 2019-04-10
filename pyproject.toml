@@ -73,7 +73,7 @@ flake8-bugbear = ">=18.8.0"
 isort = { version = ">=4.3.15", extras = ["pyproject"] }
 mypy = ">=0.670"
 pytest = ">=4.3.0"
-pytest-asyncio = ">=0.10.0"
+pytest-aiohttp = ">=0.3.0"
 pytest-cov = ">=2.6.1"
 
 [build-system]

@@ -8,6 +8,14 @@ __all__ = (
 class HandlerInspectorError(Exception):
     __slots__ = ("_handler", "_param")
 
+    @property
+    def handler(self) -> str:
+        return self._handler
+
+    @property
+    def param(self) -> str:
+        return self._param
+
     def __init__(self, *, handler: str, param: str) -> None:
         self._handler = handler
         self._param = param
