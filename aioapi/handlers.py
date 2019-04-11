@@ -1,4 +1,3 @@
-import json
 from dataclasses import dataclass
 from typing import Awaitable, Callable, Dict, Iterator, Tuple, Union, cast
 
@@ -7,6 +6,7 @@ from aiohttp.abc import AbstractView
 from aiohttp.web_routedef import _HandlerType, _SimpleHandler
 from pydantic import BaseModel, ValidationError
 
+from aioapi.exceptions import HTTPBadRequest
 from aioapi.inspect.entities import HandlerMeta
 from aioapi.inspect.inspector import HandlerInspector, param_of
 from aioapi.typedefs import Body, PathParam, QueryParam
@@ -121,28 +121,13 @@ async def _validate_kwargs(
     try:
         cleaned = cast(BaseModel, meta.request_type).parse_obj(raw)
     except ValidationError as e:
-        await _raise_on_validation_error(request, e)
+        raise HTTPBadRequest(validation_error=e) from e
 
     for kwargs_data_generator in data_generators.kwargs:
         for k, param in kwargs_data_generator(meta, cleaned):
             validated[k] = param
 
     return validated
-
-
-async def _raise_on_validation_error(
-    request: web.Request, exc: ValidationError
-) -> None:
-    raise web.HTTPBadRequest(
-        content_type="application/json",
-        text=json.dumps(
-            {
-                "type": "validation_error",
-                "title": "Your request parameters didn't validate.",
-                "invalid_params": exc.errors(),
-            }
-        ),
-    )
 
 
 def _get_data_generators(meta: HandlerMeta) -> DataGenerators:

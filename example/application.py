@@ -1,6 +1,7 @@
 from aiohttp import web
 
 import aioapi as api
+from aioapi.middlewares import validation_error_middleware
 from example import views
 
 __all__ = ("get_application",)
@@ -19,5 +20,6 @@ def get_application():
             api.view("/hello_view", views.HelloView),
         ]
     )
+    app.middlewares.append(validation_error_middleware)
 
     return app
