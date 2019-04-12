@@ -1,3 +1,4 @@
+import json
 from dataclasses import dataclass
 from typing import Awaitable, Callable, Dict, Iterator, Tuple, Union, cast
 
@@ -149,7 +150,12 @@ def _gen_raw_data_generators(meta: HandlerMeta) -> Iterator[_GenRawDataCallable]
 
 
 async def _gen_body_raw_data(request: web.Request) -> _GenRawDataResult:
-    return "body", await request.json()
+    try:
+        raw = await request.json()
+    except json.JSONDecodeError:
+        raw = {}
+
+    return "body", raw
 
 
 async def _gen_path_raw_data(request: web.Request) -> _GenRawDataResult:

@@ -54,6 +54,21 @@ class TestSimple:
                 },
             ),
             (
+                None,
+                HTTPStatus.BAD_REQUEST,
+                {
+                    "type": "validation_error",
+                    "title": "Your request parameters didn't validate.",
+                    "invalid_params": [
+                        {
+                            "loc": ["body", "name"],
+                            "msg": "field required",
+                            "type": "value_error.missing",
+                        }
+                    ],
+                },
+            ),
+            (
                 {"name": "Walter", "age": "random"},
                 HTTPStatus.BAD_REQUEST,
                 {
