@@ -4,6 +4,8 @@
 
 Yet another way to build APIs using [`AIOHTTP`](https://aiohttp.readthedocs.io/) framework.
 
+Follow [documentation](https://gr1n.github.io/aioapi/) to know what you can do with `AIOAPI`.
+
 ## Installation
 
 ```sh
@@ -12,7 +14,7 @@ $ pip install aioapi
 
 ## Usage
 
-Examples of usage can be found at `examples` directory.
+Examples of usage can be found at [`examples/`](https://github.com/Gr1N/aioapi/tree/master/example) directory.
 
 To run example use command below:
 
@@ -22,7 +24,7 @@ $ make example
 
 ## Contributing
 
-To work on the `aioapi` codebase, you'll want to clone the project locally and install the required dependencies via [poetry](https://poetry.eustace.io):
+To work on the `AIOAPI` codebase, you'll want to clone the project locally and install the required dependencies via [poetry](https://poetry.eustace.io):
 
 ```sh
 $ git clone git@github.com:Gr1N/aioapi.git
@@ -47,4 +49,4 @@ If you're interesting in project's future you can find milestones and plans at [
 
 ## License
 
-`aioapi` is licensed under the MIT license. See the license file for details.
+`AIOAPI` is licensed under the MIT license. See the license file for details.

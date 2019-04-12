@@ -4,6 +4,14 @@ POETRY ?= $(HOME)/.poetry/bin/poetry
 example:
 	@$(POETRY) run python example
 
+.PHONY: docs-serve
+docs-serve:
+	@$(POETRY) run mkdocs serve
+
+.PHONY: docs-gh-deploy
+docs-gh-deploy:
+	@$(POETRY) run mkdocs gh-deploy
+
 .PHONY: install-poetry
 install-poetry:
 	@curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python

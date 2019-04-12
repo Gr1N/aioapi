@@ -1,0 +1,33 @@
+site_name: AIOAPI
+theme:
+  name: material
+
+repo_name: Gr1N/aioapi
+repo_url: https://github.com/Gr1N/aioapi
+
+extra:
+  social:
+    - type: github
+      link: https://github.com/Gr1N
+    - type: linkedin
+      link: https://linkedin.com/in/ngrishko
+
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+      linenums: true
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Tutorial:
+      Intro: tutorial/intro.md
+      Data Validation: tutorial/data_validation.md
+      Path Parameters: tutorial/path_parameters.md
+      Query Parameters: tutorial/query_parameters.md
+      Request Body: tutorial/request_body.md
+      Components: tutorial/components.md
+      Handling Errors: tutorial/handling_errors.md
+  - Release Notes: release_notes.md
