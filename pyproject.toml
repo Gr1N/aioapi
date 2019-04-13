@@ -49,6 +49,7 @@ readme = "README.md"
 
 homepage = "https://github.com/Gr1N/aioapi"
 repository = "https://github.com/Gr1N/aioapi"
+documentation = "https://gr1n.github.io/aioapi"
 
 keywords = ["asyncio", "aiohttp", "api", "typing"]
 
