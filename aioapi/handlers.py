@@ -71,7 +71,7 @@ def wraps_simple(handler: _SimpleHandler) -> _SimpleHandler:
     return wrapped
 
 
-def wraps_method(*, handler: _HandlerCallable, handler_name: str):
+def wraps_method(*, handler: _HandlerCallable, handler_name: str) -> _HandlerCallable:
     handler_meta = HandlerInspector(handler=handler, handler_name=handler_name)()
     data_generators = _get_data_generators(handler_meta)
 
