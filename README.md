@@ -12,11 +12,46 @@ Follow [documentation](https://gr1n.github.io/aioapi/) to know what you can do w
 $ pip install aioapi
 ```
 
-## Usage
+## Usage & Examples
 
-Examples of usage can be found at [`examples/`](https://github.com/Gr1N/aioapi/tree/master/example) directory.
+Below you can find a simple, but powerful example of `AIOAPI` library usage:
 
-To run example use command below:
+```python
+import aioapi as api
+from aioapi import Body, PathParam
+from aioapi.middlewares import validation_error_middleware
+from aiohttp import web
+from pydantic import BaseModel
+
+
+class User(BaseModel):
+    name: str
+    age: int = 42
+
+
+async def hello_body(user_id: PathParam[int], body: Body[User]):
+    user = body.cleaned
+    return web.json_response(
+        {"id": user_id.cleaned, "name": user.name, "age": user.age}
+    )
+
+
+def main():
+    app = web.Application()
+
+    app.add_routes([api.post("/hello/{user_id}", hello_body)])
+    app.middlewares.append(validation_error_middleware)
+
+    web.run_app(app)
+
+
+if __name__ == "__main__":
+    main()
+```
+
+And there are also more examples of usage at [`examples/`](https://github.com/Gr1N/aioapi/tree/master/example) directory.
+
+To run them use command below:
 
 ```sh
 $ make example

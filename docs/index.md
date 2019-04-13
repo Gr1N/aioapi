@@ -20,7 +20,7 @@ $ pip install aioapi
 
 Look at simple application below and pay attention to the highlighted lines to see the power of `AIOAPI`:
 
-```python hl_lines="16 23"
+```python hl_lines="24 31"
 from http import HTTPStatus
 from uuid import UUID
 
@@ -28,6 +28,14 @@ import aioapi as api
 from aioapi import Body, PathParam
 from aiohttp import web
 from pydantic import BaseModel
+
+
+class Database:
+    async def get_user(self, *, user_id):
+        ...
+
+    async def create_user(self, *, user_id, name, age):
+        ...
 
 
 class User(BaseModel):
@@ -55,6 +63,7 @@ async def create_user(app: web.Application, body: Body[User])
 def main():
     app = web.Application()
 
+    app["db"] = Database()
     app.add_routes([
         api.post("/users", create_user),
         api.get("/users/{user_id}", get_user),
