@@ -11,5 +11,5 @@ attrs==19.1.0
 chardet==3.0.4
 idna==2.8
 multidict==4.5.2
-pydantic==0.22
+pydantic==0.25
 yarl==1.3.0
