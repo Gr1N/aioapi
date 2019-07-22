@@ -58,13 +58,10 @@ lint: lint-black lint-flake8 lint-isort lint-mypy
 test:
 	@$(POETRY) run pytest --cov-report term --cov-report html --cov=aioapi -vv
 
+.PHONY: codecov
+codecov:
+	@$(POETRY) run codecov --token=$(CODECOV_TOKEN)
+
 .PHONY: publish
 publish:
 	@$(POETRY) publish --username=$(PYPI_USERNAME) --password=$(PYPI_PASSWORD) --build
-
-.PHONY: ci-quality
-ci-quality: install lint test
-	@$(POETRY) run codecov --token=$(CODECOV_TOKEN)
-
-.PHONY: ci-publish
-ci-publish: install-poetry publish

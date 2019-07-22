@@ -1,6 +1,6 @@
 # aioapi
 
-![GitHub commit merge status](https://img.shields.io/github/commit-status/Gr1N/aioapi/master/HEAD.svg?label=build%20status) [![codecov](https://codecov.io/gh/Gr1N/aioapi/branch/master/graph/badge.svg)](https://codecov.io/gh/Gr1N/aioapi) ![PyPI](https://img.shields.io/pypi/v/aioapi.svg?label=pypi%20version) ![PyPI - Downloads](https://img.shields.io/pypi/dm/aioapi.svg?label=pypi%20downloads) ![GitHub](https://img.shields.io/github/license/Gr1N/aioapi.svg)
+[![Build Status](https://cloud.drone.io/api/badges/Gr1N/aioapi/status.svg)](https://cloud.drone.io/Gr1N/aioapi) [![codecov](https://codecov.io/gh/Gr1N/aioapi/branch/master/graph/badge.svg)](https://codecov.io/gh/Gr1N/aioapi) ![PyPI](https://img.shields.io/pypi/v/aioapi.svg?label=pypi%20version) ![PyPI - Downloads](https://img.shields.io/pypi/dm/aioapi.svg?label=pypi%20downloads) ![GitHub](https://img.shields.io/github/license/Gr1N/aioapi.svg)
 
 Yet another way to build APIs using [`AIOHTTP`](https://aiohttp.readthedocs.io/) framework.
 
