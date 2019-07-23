@@ -38,7 +38,7 @@ skip = ".eggs,.venv,venv"
 
 [tool.poetry]
 name = "aioapi"
-version = "0.3.0-alpha.0"
+version = "0.3.0-alpha.1"
 description = "Yet another way to build APIs using AIOHTTP framework"
 authors = [
   "Nikita Grishko <gr1n@protonmail.com>"
