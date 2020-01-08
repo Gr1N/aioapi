@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
@@ -40,17 +40,17 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -169,7 +169,7 @@
         
       
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -403,13 +403,13 @@
 18
 19
 20
-21</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">aioapi</span> <span class="kn">as</span> <span class="nn">api</span>
+21</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">aioapi</span> <span class="k">as</span> <span class="nn">api</span>
 <span class="kn">from</span> <span class="nn">aioapi</span> <span class="kn">import</span> <span class="n">QueryParam</span>
 <span class="kn">from</span> <span class="nn">aioapi.middlewares</span> <span class="kn">import</span> <span class="n">validation_error_middleware</span>
 <span class="kn">from</span> <span class="nn">aiohttp</span> <span class="kn">import</span> <span class="n">web</span>
 
 
-<span class="hll"><span class="n">async</span> <span class="k">def</span> <span class="nf">hello_query</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">QueryParam</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+<span class="hll"><span class="k">async</span> <span class="k">def</span> <span class="nf">hello_query</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">QueryParam</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
 </span>    <span class="k">return</span> <span class="n">web</span><span class="o">.</span><span class="n">json_response</span><span class="p">({</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="o">.</span><span class="n">cleaned</span><span class="p">})</span>
 
 
@@ -435,7 +435,7 @@
 5
 6
 7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">async</span> <span class="k">def</span> <span class="nf">hello_query</span><span class="p">(</span>
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">hello_query</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">QueryParam</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
 <span class="hll">    <span class="n">age</span><span class="p">:</span> <span class="n">QueryParam</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">QueryParam</span><span class="p">(</span><span class="mi">42</span><span class="p">),</span>
 </span><span class="p">):</span>
@@ -518,6 +518,7 @@ Server: Python/3.7 aiohttp/3.5.4
                 
                   
                 
+                
               
               
                 
@@ -593,7 +594,7 @@ Server: Python/3.7 aiohttp/3.5.4
       
     </div>
     
-      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
