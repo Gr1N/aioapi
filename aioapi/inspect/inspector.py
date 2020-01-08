@@ -77,8 +77,8 @@ class HandlerInspector:
                 continue
 
             request_mapping[k] = (
-                create_model(  # type: ignore
-                    k.title(), **{k: v for k, v in mapping.items()}
+                create_model(
+                    k.title(), **{k: v for k, v in mapping.items()}  # type: ignore
                 ),
                 Required,
             )

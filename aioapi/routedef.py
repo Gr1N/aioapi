@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Any, Optional, Type
 
 from aiohttp import hdrs
 from aiohttp.abc import AbstractView
@@ -46,7 +46,7 @@ def delete(path: str, handler: _HandlerType, **kwargs: Any) -> RouteDef:
     return route(hdrs.METH_DELETE, path, handler, **kwargs)
 
 
-def view(path: str, handler: AbstractView, **kwargs: Any) -> RouteDef:
+def view(path: str, handler: Type[AbstractView], **kwargs: Any) -> RouteDef:
     return route(hdrs.METH_ANY, path, handler, **kwargs)
 
 
