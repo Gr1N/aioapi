@@ -8,9 +8,9 @@ example:
 docs-serve:
 	@$(POETRY) run mkdocs serve
 
-.PHONY: docs-gh-deploy
-docs-gh-deploy:
-	@$(POETRY) run mkdocs gh-deploy
+.PHONY: docs-build
+docs-build:
+	@$(POETRY) run mkdocs build
 
 .PHONY: install-poetry
 install-poetry:
